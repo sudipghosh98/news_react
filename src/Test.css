@@ -1,0 +1,42 @@
+          
+#styleUiCard{
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#newsContainer{
+    float: left; 
+    width: 50%;
+    margin: 20px;
+   
+}
+#styleOfFilter{
+    width: 30%;
+    float:left;
+    color: aqua;
+    border: 1px solid gray;
+    padding: 30px;
+    margin: 30px;
+    height: 40vh;
+    border-radius: 20px;
+    padding-top: 50px;
+}
+
+label{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+.container{
+    background-color: rgba(245, 242, 206, 0.397);
+}
+#button{
+    width: 100%;
+    height:80px;
+    padding-left: 50px;
+   padding-top: 20px;
+    background-color: wheat; 
+    border-bottom: 0.2px solid rgb(148, 144, 144);
+    
+}
