@@ -1,6 +1,24 @@
 import React,{Component} from 'react';
 import './Test.css';
 class Test extends Component{
+  constructor(props){
+    super(props);
+    var newList="";
+    fetch("https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=ef1c0814d9164103819c7b0e88719a12")
+    .then((response)=>{console.log(response);
+          return response.json();
+    })
+    .then((myjson)=>{
+      console.log(myjson.articles );
+     newList=myjson.articles ;
+      return myjson;
+    }
+  
+    );
+    this.state = {NewsList: newList,
+                   Country:'' 
+      };
+}
     render(){
 
         return(
