@@ -10,7 +10,8 @@ class Test extends Component{
     this.state = {NewsList: [],
       Country:'in' ,
       button:'grey',
-      load:true     
+      load:true,
+      error:false     
 };
 this.comp(this.state.Country);
 
@@ -20,7 +21,10 @@ this.comp(this.state.Country);
  async comp(a){
     await fetch("https://newsapi.org/v2/top-headlines?country="+a+"&category=&apiKey=ef1c0814d9164103819c7b0e88719a12")
     .then((response)=>{console.log(response);
-          return response.json();
+      if(response.ok)
+    return response.json();
+   else
+   throw new Error(response.status);
     })
     .then((myjson)=>{
       console.log(myjson.articles);
@@ -29,9 +33,15 @@ this.comp(this.state.Country);
       load:false
     });
       return myjson;
-    }
-  
-    );
+    })
+    .catch((error)=>{
+      console.log(error);
+      this.setState ( {
+      
+        error:true,
+        load:false
+        });
+    });
    
 }
 ShowLatestNew(e){
@@ -40,12 +50,22 @@ ShowLatestNew(e){
  
  console.log(e);
  this.comp("us");
+ this.setState ( {
+      
+  error:false,
+  load:true
+  });
 }
 OnButtonClick=(e)=>{
   e.preventDefault();
 console.log("hello");
 console.log(Test.s);
 this.comp(Test.s);
+this.setState ( {
+      
+  error:false,
+  load:true
+  });
 }
 OnButtonClick1=(g)=>{
   g.preventDefault();
@@ -62,8 +82,13 @@ OnButtonClick1=(g)=>{
   // this.comp(e.target.value);
 }
     render(){
-      if(this.state.loaded){
-        return <div>Loading...</div>
+      if(this.state.load){
+        return  <div class="ui active inverted dimmer">
+        <div class="ui text loader" style={{textAlign:'center',marginTop:'50px',fontSize:"50px"}}>Loading...</div>
+      </div>
+    }
+    if(this.state.error){
+      return <div  style={{textAlign:'center',marginTop:'300px',fontSize:"50px"}}><i class="exclamation triangle icon big"></i>Error Loading Data</div>
     }
         return(
       <div id="container" style={{backgroundColor:'white'}}>

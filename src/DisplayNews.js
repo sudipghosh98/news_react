@@ -10,7 +10,7 @@ class DisplayNews extends React.Component{
     }
     render(){
         if(this.props.fun.length===0)
-        return <div >No News In the Api</div>
+        return <div style={{fontSize:'30px',textAlign:'center',backgroundColor:"white"}}>No News In the Api</div>
         
         return (
             <div  id="main">
