@@ -3,11 +3,14 @@ import './Test.css';
 import DisplayNews from './DisplayNews';
 class Test extends Component{
  static s="hello";
+ static button="grey";
   constructor(props){
     super(props);
     
     this.state = {NewsList: [],
-      Country:'in' 
+      Country:'in' ,
+      button:'grey',
+      load:true     
 };
 this.comp(this.state.Country);
 
@@ -22,7 +25,9 @@ this.comp(this.state.Country);
     .then((myjson)=>{
       console.log(myjson.articles);
      
-     this.setState({NewsList:myjson.articles});
+     this.setState({NewsList:myjson.articles,
+      load:false
+    });
       return myjson;
     }
   
@@ -32,21 +37,24 @@ this.comp(this.state.Country);
 ShowLatestNew(e){
   // this.comp("us");
   // this.comp(e);
-
+ 
  console.log(e);
  this.comp("us");
 }
-OnButtonClick=()=>{
-
+OnButtonClick=(e)=>{
+  e.preventDefault();
 console.log("hello");
 console.log(Test.s);
-// this.comp(Test.s);
+this.comp(Test.s);
 }
 OnButtonClick1=(g)=>{
+  g.preventDefault();
   console.log("bye");
   console.log(g.target.value);
   Test.s=g.target.value;
   console.log(Test.s);
+  Test.button='black';
+  this.setState()
   // var f=document.getElementById('dropdown').value;
   // console.log(f);
   // console.log(e.target.value);
@@ -54,19 +62,28 @@ OnButtonClick1=(g)=>{
   // this.comp(e.target.value);
 }
     render(){
-
+      if(this.state.loaded){
+        return <div>Loading...</div>
+    }
         return(
-      <div id="container">
+      <div id="container" style={{backgroundColor:'white'}}>
        <div id="button"> <button class="ui secondary button" onClick={this.ShowLatestNew.bind(this,"in")} >Show Latest News
-  </button></div>
+  </button>
+  </div>
           
          
-           <div class="ui form" id="styleOfFilter">
-           <form>
-              <div class="field">
+           <div class="ui form" id="styleOfFilter" style={{backgroundColor:'white'}}>
+             <div  className="upper" style={{marginBottom:'10px'}}>
+              <span style={{float:'left',fontSize:"20px"}}>Filter News</span><span style={{float:'right',fontSize:"20px",color:"blue"}}>Reset</span>
+           
+            
+             </div>
+          <hr style={{marginTop:'40px',border:"1px solid grey"}}/>
+           <form >
+              <div class="field" style={{padding:"10px"}}>
                 
-                    <label>Country</label>
-                    <select class="ui search dropdown" id="dropdown" onChange={this.OnButtonClick1}>
+                    <label style={{color:'grey',fontSize:"20px",marginTop:"10px",marginBottom:'10px',borderRadius:"10px"}}>COUNTRY</label>
+                    <select class="ui search dropdown" id="dropdown" onChange={this.OnButtonClick1} >
                     <option value="">Select Country</option>
                     <option value="af">Afghanistan</option>
    
@@ -146,13 +163,14 @@ OnButtonClick1=(g)=>{
     
   </div>
  
-  <button class="ui secondary button" style={{float:"right"}} onClick={this.OnButtonClick} >Result
+  <button class="ui secondary button" style={{float:"right",height:"auto",width:"95%",marginLeft:'10px',backgroundColor:Test.button}}
+   onClick={this.OnButtonClick} >Show Result
   </button>
 </form>
 </div>
          
          <div id="newsContainer">
-         <DisplayNews fun={this.state.NewsList}/>
+         <DisplayNews fun={this.state.NewsList} loaded={this.state.load}/>
           </div>
 
       </div>

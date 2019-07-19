@@ -9,6 +9,9 @@ class DisplayNews extends React.Component{
        console.log(this.props.fun);
     }
     render(){
+        if(this.props.fun.length===0)
+        return <div >No News In the Api</div>
+        
         return (
             <div  id="main">
           
@@ -16,17 +19,33 @@ class DisplayNews extends React.Component{
                         this.props.fun.map((sub)=>{
                             return (
                                 
-                                <div className="ui card" key={sub.url} id="he">
- <div class="header"><h3>{sub.content}</h3></div>
+                                <div className="ui card" key={sub.url} id="he" >
+                                    <span
+  class="w3-button w3-large w3-display-topright">x</span>
+ <div class="header"><span><h3>{sub.content}</h3></span>  </div>
     <div class="meta">{sub.author} | {sub.publishedAt}</div>
-    <span><img src={sub.urlToImage} style={{height:"50px",width:"80px"}}/>
-    <div class="description" style={{float:"left"}}>
+    <div>
+      <div style={{width: '28%',float: 'left'}}> <img src={sub.urlToImage}  style={{width:'100%',height:'200px'}} /></div>
+    <div class="description" style={{float: 'left',width: '70%',marginLeft:'5px'}}>
       <p>{sub.description}</p>
       <b>Referance</b><br/>
-     <p> <a>{sub.url}</a></p>
+      <div > <a href={sub.url} style={{    overflowWrap: 'break-word',color:'blue'}}>{sub.url}</a></div>
     </div>
+      </div>
+        
+  {/* <span><div class="d-inline p-2" style={{float:'left',padding:'10px'}}> <img src={sub.urlToImage} style={{height:"300px",width:"400px"}}/></div></span><span><div class="d-inline p-2">  <p>{sub.description}</p>
+     <b>Referance</b><br/>
+      <a href={sub.url} target="_blank" style={{color:'blue',textDecoration:'underline'}}>{sub.url}</a></div></span> */}
+  {/* <span>  <img src={sub.urlToImage} style={{height:"150px",width:"200px"}}/> <div style={{float:'left'}}> <span class="description" style={{float:"left"}}>
+       <p>{sub.description}</p>
+     <b>Referance</b><br/>
+     <p> <a>{sub.url}</a></p>
     </span>
+    </div>
+  </span> */
+  }
   </div>
+  
                             );
                         })
                     }
