@@ -49,7 +49,7 @@ ShowLatestNew(e){
   // this.comp(e);
  
  console.log(e);
- this.comp("us");
+ this.comp("in");
  this.setState ( {
       
   error:false,
