@@ -69,7 +69,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 
-
+Note 
 1. Please make sure that all the node dependences are install in your system to run the code.
 2. Sir, the api given to me is not function, so I have used another api inspite of using the given ones.
 
